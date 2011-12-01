@@ -1,1 +1,46 @@
-<html><title>Massive amounts of WIN</title><body><h1>Welcome</h1><p>This is a test site by Frank W. (and Robby N.) </p><p>Currently under construction (obviously) </p><p> lpvvnnoobs@gmail.com</p></body></html>
+<html>
+<title>Massive amounts of WIN</title>
+
+<head>
+
+</head>
+
+<body>
+<h1>Welcome</h1>
+<p>This is a test site by Frank W. (and Robby N.) (and Lucas H.)</p>
+<p>Currently under construction (obviously) </p>
+<p> lpvvnnoobs@gmail.com</p>
+<script language="javascript" type="text/javascript">
+<!--
+function textBox(){
+	type = "get",
+	url = "textBox.php";
+//-->
+}
+</script>
+
+
+<TABLE>
+    
+    <TR>
+    <TD>
+	<form id="form" method="get">
+	<p><textarea id="Code" name = "Code" value="<?php echo mysql_fetch_array($result);?>">Enter your code here</textarea></p>
+	<p><input type="text" id = "username" name = "username" value = "Enter your name"></text></p>
+	<input type="submit" name="codebody" value="Save Post" onClicked = "textBox();"/>
+	</form>
+
+	<form method="get" action="textBoxGet.php">
+	<input type="submit" name="fetchcode" value="Load Post" />
+	</form>
+    </TD>
+	
+    </TR>
+	<TR>
+	<TD>
+	</TD>
+	</TR>
+	<div id="results"></div>
+</TABLE>
+</body>
+</html>
