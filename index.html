@@ -2,7 +2,59 @@
 <title>Massive amounts of WIN</title>
 
 <head>
+<script type="text/javascript">
+function textBox(str1,str2)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("results").innerHTML=xmlhttp.responseText;
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+xmlhttp.open("GET","textBox.php?Code="+str1+"&username="+str2,true); //
+xmlhttp.send();
+}
 
+function textBoxGet(str1)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("results").innerHTML="Loaded";
+    document.getElementById("Code").innerHTML=xmlhttp.responseText;
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+xmlhttp.open("GET","textBoxGet.php?username="+str1,true); //
+xmlhttp.send();
+}
+
+</script>
 </head>
 
 <body>
@@ -10,29 +62,16 @@
 <p>This is a test site by Frank W. (and Robby N.) (and Lucas H.)</p>
 <p>Currently under construction (obviously) </p>
 <p> lpvvnnoobs@gmail.com</p>
-<script language="javascript" type="text/javascript">
-<!--
-function textBox(){
-	type = "get",
-	url = "textBox.php";
-//-->
-}
-</script>
 
 
-<TABLE>
-    
+<TABLE>    
     <TR>
     <TD>
-	<form id="form" method="get">
-	<p><textarea id="Code" name = "Code" value="<?php echo mysql_fetch_array($result);?>">Enter your code here</textarea></p>
-	<p><input type="text" id = "username" name = "username" value = "Enter your name"></text></p>
-	<input type="submit" name="codebody" value="Save Post" onClicked = "textBox();"/>
-	</form>
+	<p><textarea id="Code" name="Code" value="" >Enter your code here</textarea></p>
+	<p>Name: <input type="text" id="username" name="username" value=""></text></p>
+	<p><button onclick = "textBox(Code.value,username.value);" >Save Post</button></p>
+	<p><button onclick = "textBoxGet(username.value);" >Load Post</button></p>
 
-	<form method="get" action="textBoxGet.php">
-	<input type="submit" name="fetchcode" value="Load Post" />
-	</form>
     </TD>
 	
     </TR>
@@ -40,7 +79,7 @@ function textBox(){
 	<TD>
 	</TD>
 	</TR>
-	<div id="results"></div>
 </TABLE>
+	<div id="results" name="results"></div>
 </body>
 </html>
