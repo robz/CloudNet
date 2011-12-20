@@ -1,0 +1,16 @@
+
+<html>
+<title>CPad Prototype</title>
+<body>
+<h1>"CPad" Prototype</h1>
+
+<p>New Public Post<br/>
+<textarea id="Code" name="Code" rows="25" cols="100" value="" action="wfiletoserv.php" method="post" >Enter your code here</textarea></p>
+
+
+<p>Current Public Documents</p>
+<div id="pubdocs" name="pubdocs"></div>
+
+</body>
+</html>
+

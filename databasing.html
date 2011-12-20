@@ -1,0 +1,76 @@
+<html>
+<head>
+<script type="text/javascript">
+function textBox(str1,str2)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("results").innerHTML=xmlhttp.responseText;
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+xmlhttp.open("GET","textBox.php?Code="+str1+"&username="+str2,true); //
+xmlhttp.send();
+}
+
+function textBoxGet(str1)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("results").innerHTML="Loaded";
+    document.getElementById("Code").value=xmlhttp.responseText;
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+xmlhttp.open("GET","textBoxGet.php?username="+str1,true); //
+xmlhttp.send();
+}
+
+</script>
+</head>
+<body>
+<TABLE>    
+    <TR>
+    <TD>
+	<p><textarea id="Code" name="Code" value="" >Enter your code here</textarea></p>
+	<p>Name: <input type="text" id="username" name="username" value=""></text></p>
+	<p><button onclick = "textBox(Code.value,username.value);" >Save Post</button></p>
+	<p><button onclick = "textBoxGet(username.value);" >Load Post</button></p>
+
+    </TD>
+	
+    </TR>
+	<TR>
+	<TD>
+	</TD>
+	</TR>
+</TABLE>
+	<div id="results" name="results"></div>
+</body>
+</html>

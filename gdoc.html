@@ -1,0 +1,87 @@
+<html>
+<title>GDocs Prototype</title>
+<head>
+<script type="text/javascript">
+var update;
+
+function gdoc(str1)
+{
+var xmlhttp;
+clearInterval(update);
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("results").innerHTML=xmlhttp.responseText;
+    init();
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+document.getElementById("results").innerHTML="Sending...";
+xmlhttp.open("GET","gdoc.php?text="+str1,true);
+//http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//http.setRequestHeader("Content-length", str1.length);
+//http.setRequestHeader("Connection", "close");
+xmlhttp.send();
+}
+
+function gdocld()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    	document.getElementById("results").innerHTML = "Loaded...";
+    	document.getElementById("text").value=xmlhttp.responseText;
+    }
+  else{
+    document.getElementById("results").innerHTML="status error: "+ xmlhttp.status;
+    }
+  }
+xmlhttp.open("POST","gdocld.php",true); 
+xmlhttp.send();
+}
+
+function init(){
+	update = setInterval(gdocld,1000);
+}
+
+function init2(){
+	update = (function loop(){
+		setTimeout(function(){
+		gdocld();
+		loop();	
+		}, 1000);	
+	})();
+}
+
+</script>
+</head>
+<body onload="init();">
+<h1>"GDocs" Prototype</h1>
+
+<p>Go ahead and edit this shit<br/>
+<textarea onkeypress="gdoc(this.value)" onkeyup="gdoc(this.value)"  id="text" name="text" rows="25" cols="100"></textarea></p>
+<p>Testing results: <div id="results" value=""></div></p>
+
+</body>
+</html>
